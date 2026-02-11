@@ -14,8 +14,6 @@ async def translate_cv(file_name: str):
     delimiter = None
     min_pos = None
     delimiters = [('"', '"'), ("[", "]")]
-    # delimiters = [("[", "]")]
-    # delimiters = [('"', '"')]
     delimiter = None
     min_pos = None
     delimiters = [('"', '"'), ("[", "]")]
@@ -34,11 +32,9 @@ async def translate_cv(file_name: str):
                     min_pos = after.find(delimiter[1])
                     to_translate = after[:min_pos]
 
-                    # print(f"{before}", end="")
                     f.write(before)
                     if len(to_translate) > 0 and extra_conditions(to_translate):
                         contents = after[min_pos + 1 :]
-                        # print(f"{to_translate}{delimiter[1]}", end="")
                         translated = await translator.translate(to_translate)
                         f.write(f"{translated.text}{delimiter[1]}")
                     else:
@@ -47,7 +43,6 @@ async def translate_cv(file_name: str):
                     min_pos = None
                     delimiter = None
                 else:
-                    # print(contents, end="")
                     f.write(contents)
 
 
